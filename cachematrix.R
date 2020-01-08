@@ -355,3 +355,5 @@ cacheSolve(myMatrix_object)
 #[,1] [,2]
 #[1,]    3    7
 #[2,]    1    5
+
+#Commit for the final submission
