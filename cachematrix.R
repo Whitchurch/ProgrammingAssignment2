@@ -4,38 +4,31 @@ remove(list = ls())
 ############ GLOBAL VARIABLES ###############
 storeCurrentMatrix <- NULL
 cornercaseCacheStateSaver <- NULL
+############END OF GLOBAL VARIABLES #####################
 
-
-############## END OF GLOBAL VARIABLES #####################
-
-
-#### FUNCTIONS#####
 
 # FUNCTION 1:
+
 # makeCacheMatrix: Creates an object that has setters and getters, as well as cache for storing the latest inverse of a matrix.
-# Parameters: x: accepts a matrix data structure.
+
+# Input Parameters: x:  matrix 
 #functions: getMatrix, setMatrix, getInverseMatrix,setInverseMatrix
 
 makeCacheMatrix <- function(x = matrix()) {
-  # Variables inside the object
   
-  inverseMatrix <-
-    NULL #variable to store the inverse of the matrix
+  # Variables inside the object
+  inverseMatrix <- NULL #variable to store the inverse of the matrix
   
   # Getters and Setters for the Matrix variable of the object
-  getMatrix <-
-    function()
-      x # getter to retrieve the passed in matrix
+  getMatrix <-function()x # getter to retrieve the passed in matrix
   setMatrix <- function(y = matrix())
   {
     inverseMatrix <<- NULL
     x <<- y
   }
   
-  
   # Getters and Setters for the Inverse Matrix variable of the object
-  getInverseMatrix <- function()
-    inverseMatrix
+  getInverseMatrix <- function()inverseMatrix
   setInverseMatrix <- function(y = matrix())
   {
     inverseMatrix <<- y
@@ -52,8 +45,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 # FUNCTION 2:
-# cacheSolve: Used to check if the object being supplied, already has an inverse matrix cached. If the object has no inverse, then a new inverse matix is created.
-# Parameters: x: accepts makeCacheMatrix object
+
+# cacheSolve: This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. 
+#If the inverse has already been calculated (and the matrix has not changed), then the cachesolve 
+#should retrieve the inverse from the cache.
+
+# Input Parameters: x: makeCacheMatrix object
 
 cacheSolve <- function(x = makeCacheMatrix()) {
   ##################################### START of HELPER FUNCTIONS #######################################3
@@ -99,7 +96,7 @@ cacheSolve <- function(x = makeCacheMatrix()) {
     }
   }
   
-  #########  END of HELPER FUNCTIONS ########################################################3
+  #########  END of HELPER FUNCTIONS ########################################################
   
   
   
@@ -142,15 +139,12 @@ cacheSolve <- function(x = makeCacheMatrix()) {
         if (is.null(x$getInverseMatrix()))
           #Corner case: intializing the same object twice in a row, with same content.
         {
-          #print("Corner case: retiriving from the Central Cache: which is good Caching design")
-          #print(cornercaseCacheStateSaver)
           x$setInverseMatrix(cornercaseCacheStateSaver)
         }
         else
           #Step3: As long as the dimensions and the contents of both matrices match, fetch from the cache
         {
-          #print("Normal Caching scenario as per assignment - retrieveing from object as assignmern requires: which is bad Caching design")
-          #print(x$getInverseMatrix())
+          return(x$getInverseMatrix())
         }
         
       }
@@ -168,7 +162,7 @@ cacheSolve <- function(x = makeCacheMatrix()) {
   x$getInverseMatrix()
 }
 
-
+#####End of function implementation/ what follows below is testbenches to test the code:############################################################
 
 
 #Test Bench for the Caching code:
