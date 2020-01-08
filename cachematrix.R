@@ -9,7 +9,7 @@ cornercaseCacheStateSaver <- NULL
 
 # FUNCTION 1:
 
-# makeCacheMatrix: Creates an object that has setters and getters, as well as cache for storing the latest inverse of a matrix.
+# makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse.
 
 # Input Parameters: x:  matrix 
 #functions: getMatrix, setMatrix, getInverseMatrix,setInverseMatrix
